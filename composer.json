@@ -1,0 +1,26 @@
+{
+    "name": "blackxel/facturapyme-sdk-php",
+    "description": "PHP SDK para integrar API de facturapy.me",
+    "type": "library",
+    "homepage": "https://facturapy.me",
+    "support": {
+        "issues": "https://github.com/blackxel/facturapyme-sdk-php/issues",
+        "source": "https://github.com/blackxel/facturapyme-sdk-php"
+    },
+    "license": "Unlicense",
+    "authors": [
+        {
+            "name": "blackxel",
+            "email": "dev@blackxel.com",
+            "homepage": "https://blackxel.com"
+        }
+    ],
+    "require": {
+        "ext-curl": "*"
+    },
+    "autoload": {
+      "psr-4": {
+          "Blackxel\\FacturaPyme\\": "src/FacturaPyme"
+      }
+    }
+}
