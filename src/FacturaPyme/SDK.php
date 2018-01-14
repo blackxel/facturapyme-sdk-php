@@ -37,6 +37,26 @@ class SDK
     {
         return $this->exec('dte/xml/'.$tipoDte.'/'.$folio);
     }
+    public function enviaDTE($documento)
+    {
+        return $this->exec('dte', $documento);
+    }
+    public function estadoDTE($id)
+    {
+        return $this->exec('dte/'.$id);
+    }
+    public function put($endPoint, $data)
+    {
+        return $this->exec($endPoint, $data, 'PUT');
+    }
+    public function get($endPoint)
+    {
+        return $this->exec($endPoint);
+    }
+    public function post($endPoint, $data)
+    {
+        return $this->exec($endPoint, $data);
+    }
     public function exec($endPoint, $data = null, $method = 'GET')
     {
         $verbose = null;
@@ -76,7 +96,7 @@ class SDK
         if ($info['http_code'] > 400) {
             $errorText = $response;
             if (is_object($errorText)) {
-                $errorText = $errorText->message;
+                $errorText = $errorText->error;
             }
             throw new Exception("error: ".$errorText, $info['http_code']);
         }
@@ -95,7 +115,7 @@ class SDK
         }
         if ($data) {
             $options[CURLOPT_POST] = true;
-            $options[CURLOPT_POSTFIELDS] = $data;
+            $options[CURLOPT_POSTFIELDS] = http_build_query($data);
         }
         if ($method !== 'GET') {
             $options[CURLOPT_CUSTOMREQUEST] = $method;
